@@ -1,0 +1,125 @@
+/* Menu.module.css */
+
+/* -----------------------------------
+  1) メニューボタン (kiok.jp では
+     円形のボタンに白枠 + 黒背景 + 中央に「MENU」)
+-------------------------------------- */
+.hamburgerButton {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2000; /* メニュー本体より手前に */
+    
+    /* kiok.jp 風に「黒背景 + 白枠」の円形ボタン */
+    width: 60px;
+    height: 60px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background-color: #000;
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Hover時に少し透過させるなど */
+  .hamburgerButton:hover {
+    opacity: 0.8;
+  }
+  
+  /* -----------------------------------
+    2) 画面全体を覆うオーバーレイ
+       (初期状態: 下に隠す)
+  -------------------------------------- */
+  .menuOverlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* 下から上にスライドする */
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    
+    background-color: #000;  /* kiok.jp は真っ黒に近い背景 */
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  /* 開いている時（isOpen = true） */
+  .open {
+    transform: translateY(0%);
+  }
+  
+  /* -----------------------------------
+    3) メニューコンテンツ
+       (中央に文言が並ぶ)
+  -------------------------------------- */
+  .menuContent {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    /* テキスト色 ( 白 ) */
+    color: #fff;
+  }
+  
+  /* ul は一覧を中央配置 */
+  .menuContent ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* -----------------------------------
+    4) メニューリンク 
+       (大きめの文字 / ステップアニメーション)
+  -------------------------------------- */
+  .menuContent li {
+    font-size: 2.4rem; /* kiok.jp っぽく大きめ */
+    font-weight: 300;  /* 実際のフォントに合わせて調整 */
+    margin: 1rem 0;
+    opacity: 0;                /* 初期状態は非表示 */
+    transform: translateY(30px);  /* 少し下にずらす */
+    animation: slideUp 0.6s forwards ease;
+  }
+  
+  /* li を順番に表示するために遅延をずらす */
+  .menuContent li:nth-child(1) { animation-delay: 0.3s; }
+  .menuContent li:nth-child(2) { animation-delay: 0.45s; }
+  .menuContent li:nth-child(3) { animation-delay: 0.6s; }
+  .menuContent li:nth-child(4) { animation-delay: 0.75s; }
+  /* 必要に応じて要素数分追加 */
+  
+  /* アニメーション定義 */
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .menuContent a {
+    text-decoration: none;
+    color: #fff; /* 白 */
+    transition: opacity 0.3s;
+    letter-spacing: 0.05em;
+  }
+  
+  /* hover 時に薄くなる */
+  .menuContent a:hover {
+    opacity: 0.7;
+  }

@@ -1,7 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
+
+
+@layer utilities {
+  .animate-menuItemEnter {
+    animation: menuItemEnter 0.3s ease forwards;
+  }
+}
+
+@keyframes menuItemEnter {
+  to {
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.fixed-menu-container {
+  transition: bottom 0.4s ease-in-out;
+}
+
+.fixed-menu {
+  transition: all 0.35s ease-in-out;
+}
+
+.fixed-menu-button {
+  transition: all 0.35s ease-in-out;
+}
+
+.fixed-menu-text-inner {
+  transition: transform 0.5s ease;
+}
+
+.fixed-menu-text-open,
+.fixed-menu-text-close {
+  transition: opacity 0.5s ease;
+}
+
+.fixed-menu-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fixed-menu-container,
+  .fixed-menu,
+  .fixed-menu-button,
+  .fixed-menu-text-inner,
+  .fixed-menu-text-open,
+  .fixed-menu-text-close,
+  .fixed-menu-icon {
+    transition: none !important;
+  }
+
+  .animate-menuItemEnter {
+    animation-duration: 1ms !important;
+    animation-delay: 0s !important;
+  }
+}
+
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -38,5 +100,56 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+.noise-background::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  animation: noise 1s steps(2) infinite;
+  opacity: 0.05;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes noise {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -5%);
+  }
+  20% {
+    transform: translate(-10%, 5%);
+  }
+  30% {
+    transform: translate(5%, -10%);
+  }
+  40% {
+    transform: translate(-5%, 15%);
+  }
+  50% {
+    transform: translate(-10%, 5%);
+  }
+  60% {
+    transform: translate(15%, 0);
+  }
+  70% {
+    transform: translate(0, 10%);
+  }
+  80% {
+    transform: translate(-15%, 0);
+  }
+  90% {
+    transform: translate(10%, 5%);
+  }
+  100% {
+    transform: translate(5%, 0);
   }
 }
