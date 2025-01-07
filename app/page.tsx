@@ -1,5 +1,6 @@
 "use client";
 import FixedMenu from '../src/components/Menu';
+import Footer from '../src/components/Footer';
 import './globals.css';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
           これは動的な背景を持つページです。背景はクライアントサイドでレンダリングされます。
         </p>
       </div>
+      <Footer />
     </main>
   )
 }
